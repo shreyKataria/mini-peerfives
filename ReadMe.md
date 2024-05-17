@@ -201,4 +201,3 @@ This project provides a simple way to manage and track the rewarding of P5 point
 
 If you have any questions or run into any issues, feel free to open an issue on the project's GitHub repository.
 
-```
