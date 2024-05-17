@@ -161,8 +161,9 @@ After Deletion:
 
 The involved users' balances will be adjusted to their previous states before the transaction.
 
+---------
 
-# Completed
+## Completed
 
 1. Person A gives 50 P5 points to Person B
 Before transaction:
@@ -208,8 +209,8 @@ Person	P5 balance	Rewards balance
 A	100	50
 B	100	0
 
-Conclusion
+**Conclusion**
 This project provides a simple way to manage and track the rewarding of P5 points between users. By following the steps in this README, you can set up the project, create users, reward points, view transactions, and undo transactions if needed.
 
 If you have any questions or run into any issues, feel free to open an issue on the project's GitHub repository.
-
+```
