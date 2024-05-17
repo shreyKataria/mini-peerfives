@@ -161,40 +161,52 @@ After Deletion:
 
 The involved users' balances will be adjusted to their previous states before the transaction.
 
-##Example Scenarios
 
-1. Giving P5 Points
-Scenario: Person A gives 50 P5 points to Person B.
+# Completed
 
-Before:
-Person A: 100 P5, 0 Rewards
-Person B: 100 P5, 0 Rewards
-API Call:
+1. Person A gives 50 P5 points to Person B
+Before transaction:
 
-POST /api/rewards
-{
-    "givenBy": "userIdOfPersonA",
-    "givenTo": "userIdOfPersonB",
-    "points": 50
-}
+Person	P5 balance	Rewards balance
+A	100	0
+B	100	0
+After transaction:
 
-After:
-Person A: 50 P5, 0 Rewards
-Person B: 100 P5, 50 Rewards
+Person	P5 balance	Rewards balance
+A	50	0
+B	100	50
+2. Person B gives 50 P5 points to Person A
+Before transaction:
 
-2. Deleting a Transaction
-Scenario: Person A deletes the first transaction (50 P5 points to Person B).
+Person	P5 balance	Rewards balance
+A	50	0
+B	100	50
+After transaction:
 
-Before:
-Person A: 50 P5, 50 Rewards
-Person B: 50 P5, 50 Rewards
+Person	P5 balance	Rewards balance
+A	50	50
+B	50	50
+3. Person A gives 75 P5 points to Person B
+Before transaction:
 
-API Call:
-DELETE /api/rewards/transaction/:transactionIdOfFirstTransaction
+Person	P5 balance	Rewards balance
+A	50	50
+B	50	50
+After transaction:
 
-After:
-Person A: 100 P5, 50 Rewards
-Person B: 100 P5, 0 Rewards
+Not possible as Person A has 50 P5 in balance
+
+4. Person A deletes 1st transaction of P5
+Before transaction:
+
+Person	P5 balance	Rewards balance
+A	50	50
+B	50	50
+After transaction:
+
+Person	P5 balance	Rewards balance
+A	100	50
+B	100	0
 
 Conclusion
 This project provides a simple way to manage and track the rewarding of P5 points between users. By following the steps in this README, you can set up the project, create users, reward points, view transactions, and undo transactions if needed.
