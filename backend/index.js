@@ -3,6 +3,7 @@ const express = require("express");
 const { default: mongoose } = require("mongoose");
 const connectDB = require("./config/db");
 require("dotenv").config();
+const userRouter = require("./routes/userRoute");
 
 // initialize app
 const app = express();
@@ -18,9 +19,7 @@ app.use(bodyParser.json());
 
 // routes
 
-app.get("/", (req, res, next) => {
-  res.json({ message: "test-app" });
-});
+app.use("/api", userRouter);
 
 // server
 app.listen(port, () => console.log(`server started at port : ${port}`));
