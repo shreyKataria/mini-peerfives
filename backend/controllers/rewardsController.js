@@ -54,6 +54,7 @@ const getUserRewardHistoryByUserId = async (req, res) => {
   }
 };
 
+// get last rewards transaction details and remaining balance
 const getTransactionDetailsById = async (req, res) => {
   try {
     const reward = await RewardHistory.findById(req.params.id)
@@ -70,8 +71,33 @@ const getTransactionDetailsById = async (req, res) => {
   }
 };
 
+// delete rewards and balance adjustment
+const deleteRewardById = async (req, res) => {
+  try {
+    const reward = await RewardHistory.findById(req.params.id);
+    if (!reward) {
+      return res.status(404).json({ message: "Reward not found" });
+    }
+
+    const userFrom = await User.findById(reward.givenBy);
+    const userTo = await User.findById(reward.givenTo);
+
+    userFrom.p5Balance += reward.points;
+    userTo.rewardsBalance -= reward.points;
+
+    await userFrom.save();
+    await userTo.save();
+    await reward.deleteOne({ _id: req.params.id });
+
+    res.status(200).json({ message: "last reward deleted" });
+  } catch (err) {
+    res.status(500).json({ message: "Server Error", error: err.message });
+  }
+};
+
 module.exports = {
   sendReward,
   getUserRewardHistoryByUserId,
   getTransactionDetailsById,
+  deleteRewardById,
 };

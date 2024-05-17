@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const RewardHistory = new mongoose.Schema({
-  date: {
+  datetime: {
     type: Date,
     default: Date.now,
   },
