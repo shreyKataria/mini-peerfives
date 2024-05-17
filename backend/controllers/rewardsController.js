@@ -54,7 +54,24 @@ const getUserRewardHistoryByUserId = async (req, res) => {
   }
 };
 
+const getTransactionDetailsById = async (req, res) => {
+  try {
+    const reward = await RewardHistory.findById(req.params.id)
+      .populate("givenBy", "name p5Balance")
+      .populate("givenTo", "name rewardsBalance");
+
+    if (!reward) {
+      return res.status(404).json({ message: "reward transaction not found" });
+    }
+
+    res.status(200).json(reward);
+  } catch (err) {
+    res.status(500).json({ message: "Server Error", error: err.message });
+  }
+};
+
 module.exports = {
   sendReward,
   getUserRewardHistoryByUserId,
+  getTransactionDetailsById,
 };
